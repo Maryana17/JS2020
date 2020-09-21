@@ -13,6 +13,82 @@ $(document).ready(function(){
 		$(".coin .result").text(coinData);
 	});
 	
+	$(".text .process").click(function(){
+		var data = $(".text .data").val();
+		
+		var textData = reverText(data);
+		
+		$(".text .result").text(textData);
+	});
+	
+	$(".word .process").click(function(){
+		var data = $(".word .data").val();
+		
+		var textData = numberWord(data);
+		
+		$(".word .result").text(textData);
+	});
+	
+	
+	$(".rules .process").click(function(){
+		var data = $(".rules .data").val();
+		
+		var rulesData = rulesSlash(data);
+		
+		$(".rules .result").text(rulesData);
+	});
+	
+	function rulesSlash(text){
+		var count = 0;
+		var bra = [
+			["(", ")"],
+			["<", ">"],
+			["{", "}"]	
+		];
+		
+		for(var iText = 0; iText < text.length; iText++){
+			var symbol = text[iText];
+			for(var iBra = 0; iBra < bra.length; iBra++){
+				var onePairofBra = bra[iBra];
+				if (onePairofBra[0] == symbol){
+					count++;
+				}
+			}
+		}
+		
+		return count;
+		
+	}
+	
+	
+	
+	function numberWord(text){
+		var number = 1;
+
+		for(var i = 0; i < text.length; i++){
+			if (text[i] == " "){
+				number = number + 1;
+			}
+			
+		}
+		
+		
+		return number;
+		
+	}
+	
+	function reverText(word){
+		var result = [];
+		
+		for(var i = word.length - 1; i >= 0; i--){
+			result.push( word[i] );
+		}
+		
+		return result.join("");
+	}
+	
+	
+	
 	function calcCoinText(number){
 		if (number < 11)
 			return Numbers0To10[number];
