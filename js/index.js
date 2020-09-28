@@ -13,6 +13,83 @@ $(document).ready(function(){
 		$(".coin .result").text(coinData);
 	});
 	
+	
+	$(".how-many-numbers .process") .click(function(){
+		var data = $(".how-many-numbers .data"). val();
+		
+		var howManyNumbers = calcNumbers(data);
+		
+		$(".how-many-numbers .result").text(howManyNumbers)
+	});
+		
+	function calcNumbers(line){
+		var result = 0;
+		for(var i = 0; i < line.length; i++){
+			var symbol = line[i];
+			
+			if ( !isNaN(symbol) ){
+				result++;
+			}
+		}
+		
+		return result;
+	}
+	
+	$(".how-much .process") .click(function(){
+		var data = $(".how-much .data"). val();
+		
+		var howMuch = calcHowMuch(data);
+		
+		$(".how-much .result").text(howMuch)
+	});
+	
+	function calcHowMuch(line){
+		var result = 0;
+		var numberWasStarted =  false;
+		var flagDot = false;
+		
+			for(var i = 0; i < line.length; i++){
+				var symbol = line[i];
+				
+				if ( !isNaN(symbol) ){
+					if (!numberWasStarted){
+						result++;
+						numberWasStarted = true;
+					}
+				}else{
+					if (symbol == "."&&!flagDot){
+						flagDot = true;
+					} else{
+						numberWasStarted = false;
+						flagDot = false;
+					}
+				}
+			}
+		
+		return result;
+	}
+		
+		
+		
+			
+	$(".textarea .process").click(function(){
+		var data = $(".textarea .data").val();
+		
+		var result = data.replaceAll("\n", "<br>");
+				
+		$(".textarea .result")[0].innerHTML = result;
+	});
+		
+		
+		function nextStr(text){
+			var symbol = text;
+			if (text == '\r\n') {
+				result 
+			}
+		}
+		
+		
+		
 	$(".text .process").click(function(){
 		var data = $(".text .data").val();
 		
@@ -60,6 +137,24 @@ $(document).ready(function(){
 		
 	}
 	
+	$(".poli .process").click(function(){
+		var data = $(".poli .data").val();
+		
+		var poliData = poliSlash(data);
+		
+		$(".poli .result").text(rulesData);
+	});
+	
+	function poliSlash(text){
+		var polindrom = [];
+				
+		for(var iWord = 0; iWord < text.length; iWord++){
+			if (iWord
+		}
+		
+		return count;
+		
+	}
 	
 	
 	function numberWord(text){
