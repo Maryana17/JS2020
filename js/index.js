@@ -142,19 +142,89 @@ $(document).ready(function(){
 		
 		var poliData = poliSlash(data);
 		
-		$(".poli .result").text(rulesData);
+		$(".poli .result").text(poliData);
 	});
 	
 	function poliSlash(text){
-		var polindrom = [];
-				
-		for(var iWord = 0; iWord < text.length; iWord++){
-			if (iWord
-		}
 		
-		return count;
+				
+		for(var iWord = 0; iWord < text.length /2; iWord++){
+			if (text[iWord] != text[text.length - 1 - iWord]){
+				return false;
+			}
+			
+		}
+		return true;
 		
 	}
+	
+	$(".sentens .process").click(function(){
+		var data = $(".sentens .data").val();
+		
+		var sentensData	= sentensRules(data);
+		
+		$(".sentens .result").text(sentensData);
+	});
+	
+	function sentensRules(line){
+		
+		var newLine = [];
+		newLine[0] = line[0].toUpperCase();
+		newLine[1] = line[1];
+		for(var i = 2; i < line.length; i++){
+			if (line[i - 2] == "."){
+				newLine[i] = line[i].toUpperCase();
+			}else{
+				newLine[i] = line[i];
+			}
+						
+		}
+		return newLine.join("");
+	}
+		
+		
+	$(".fibonaci .process") .click(function(){
+		var data = $(".fibonaci .data"). val();
+		
+		var numFibonaci = formFibonaci(data);
+		
+		$(".fibonaci .result").text(numFibonaci)
+	});
+	
+	function formFibonaci(data){
+		var num = [];
+		num[0] = 1;
+		num[1] = 1;
+		
+		for(var i = 2; i < data - 0; i++){
+			num[i] = num[i-1] + num[i-2] ;
+		}	
+		
+		return num;
+	}
+		
+			
+	$(".minNumber .process") .click(function(){
+		var data = $(".minNumber .data"). val();
+		
+		var minNumbers = formulaMinNum(data);
+		
+		$(".minNumber .result").text(numFibonaci)
+	});
+	
+	function formulaMinNum(data){
+		var numbers = []
+		for(var i = 0; i < text.length; i++){
+			if (numbers[i] < numbers + 1)
+			{
+				
+			}
+		}
+		return number;
+	}
+		
+		
+	
 	
 	
 	function numberWord(text){
@@ -218,7 +288,7 @@ $(document).ready(function(){
 	var Numbers0To10 = ["ноль","один","два", "три","четыре","пять","шесть","семь","восемь","девять","десять"];
 	var Numbers11To19 = ["одиннадцать","двенадцать","тринадцать","четырнадцать","пятнадцать","шестнадцать","семнадцать","восемнадцать","девятнадцать"];
 	var tens = ["двадцать","тридцать","сорок","пятьдесят","шестьдесят","семьдесят","восемьдесят","девяноста"];
-	var sents = ["сто","двести","триста","четыреста","пятьсот","шестьсот","семьсот","восемьсот","девятьсот"]
+	var sents = ["сто","двести","триста","четыреста","пятьсот","шестьсот","семьсот","восемьсот","девятьсот"];
 	
 	
 	$(".encrypt .process").click(function(){
@@ -231,12 +301,11 @@ $(document).ready(function(){
 	});
 	
 	function encryptNumber(data){
-		var numbersText = ["ноль","один","два", "три","четыре","пять","шесть","семь","восемь","девять"]
+		var numbersText = ["ноль","один","два", "три","четыре","пять","шесть","семь","восемь","девять"];
 		var encryptData = numbersText[data].length;
 		return encryptData;
 	}
-	
-});
+};
 
 // var condition0 = true;
 // var condition1 = condition0 && false;
@@ -267,21 +336,4 @@ $(document).ready(function(){
 // function sum(anyNumber1, anyNumber2){
 	// return anyNumber1 + anyNumber2;
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
