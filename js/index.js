@@ -220,8 +220,8 @@ $(document).ready(function(){
 				
 			}
 		}
-		return number;
-	}
+		return numbers;
+	};
 		
 		
 	
@@ -305,7 +305,88 @@ $(document).ready(function(){
 		var encryptData = numbersText[data].length;
 		return encryptData;
 	}
-};
+	
+	
+	$(".uniq .process").click(function(){
+		var symbols = $(".uniq .data").val().split('');
+		
+		var uniqSymbols = [];
+	
+			for(var i = 0; i < symbols.length; i++){
+				var symbol = symbols[i];
+				
+				if (uniqSymbols.indexOf(symbol) < 0){
+					uniqSymbols.push(symbol);
+				}
+			}
+		$(".uniq .result").text(uniqSymbols);
+		
+	});
+	
+	
+	
+	$(".ten .process") .click(function(){
+		var data = $(".ten .data"). val();
+		
+		var ten = calcNumbers(data);
+		
+		$(".ten .result").text(ten);
+	});
+		
+	function calcNumbers(data){
+		var result = [];
+			for(var i = 0; i < data.length; i++){
+			var symbol = data[i] - 0;
+			
+			for(var k = i; k < data.length; k++){
+				
+			var second = data[k] - 0;
+			
+			if (symbol + second == 10){
+				result.push(symbol);
+				result.push(second);
+			}	
+		}
+			}
+		
+		return result;
+	}
+	
+	$(".anagramma .process").click(function(){
+		var data1 = $(".anagramma .data1").val();
+		var data2 = $(".anagramma .data2").val();
+		
+		var answer	= checkAna(data1, data2);
+		
+		$(".anagramma .result").text(answer);
+	});
+	
+	function checkAna(word1, word2){
+		if(word1.length !== word2.length){
+		return false
+		}
+		
+		var arr1 = word1.split('');
+		var arr2 = word2.split('');
+		
+		arr1.sort();
+		arr2.sort();
+		
+		
+		for(var i = 0; i < arr1.length; i++){
+			if (arr1[i] != arr2[i]){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	
+	
+	
+	
+	
+});
 
 // var condition0 = true;
 // var condition1 = condition0 && false;
