@@ -2,21 +2,25 @@ $(document).ready(function(){
 	
 	var goods = [
 		{
+			id: 1,
 			name: 'Blond',
 			url: 'https://upload.wikimedia.org/wikipedia/ru/thumb/f/f5/Cinderella_disney_princess.jpg/300px-Cinderella_disney_princess.jpg'
 		},
 		{
+			id: 2,
 			name: 'Red',
 			url: 'https://e7.pngegg.com/pngimages/846/621/png-clipart-ariel-disney-princess-frames-graph-disney-princess-disney-princess-fictional-character.png'
 		},
 		{
+			id: 3,
 			name: 'Black',
 			url: 'https://c7.hotpng.com/preview/285/923/688/united-states-moana-hei-hei-the-rooster-character-the-walt-disney-company-moana.jpg'
 		}
 	];
 	
+	var curentId = 0;
 		
-	$('.login-popup').hide();
+	//$('.login-popup').hide();
 	
 	$('.login-popup .close').click(function(){
 		$('.login-popup').hide();
@@ -27,6 +31,7 @@ $(document).ready(function(){
 		var newUrl = $('.goods.first .new-image-url').val();
 		
 		var good = {
+			id: goods.sort(x => -1 * x.id)[0].id + 1,
 			name: newName,
 			url: newUrl
 		};
@@ -37,6 +42,27 @@ $(document).ready(function(){
 	$('.left-menu .refresh').click(function(){
 		refreshGoods();
 	});
+	
+	$(".right") .click(function(){
+		curentId++;
+		if (curentId == goods.length ){
+			curentId = 0;
+		}
+		var good = goods[curentId];
+		$(".center-image").attr('src', good.url);
+		
+	});
+	
+	$(".left") .click(function(){
+		curentId--;
+		if (curentId < 0){
+			curentId = goods.length -1;
+		}
+		var good = goods[curentId];
+		$(".center-image").attr('src', good.url);
+		
+	});
+	
 	
 	function filterGoods(oldGoods){
 		var textFilter = $('.left-menu .request').val();
@@ -104,7 +130,9 @@ $(document).ready(function(){
 			var goodsDiv = $('<div>');
 		
 			goodsDiv.addClass('goods');
-			
+			goodsDiv.attr("data-id", good.id);
+			goodsDiv.click(fullScreen);
+						
 			var divName = $('<div>');
 			divName.text(good.name);
 			
@@ -120,4 +148,24 @@ $(document).ready(function(){
 			$('.content').append(goodsDiv);
 		}
 	}
+	
+	function fullScreen(){
+		$('.data-id').empty();
+		
+		$('.login-popup').show();
+		var a = $(this).attr('data-id');
+		for (var i = 0; i< goods.length; i++){
+			if (goods[i].id == a){
+				var goodsDiv = $('<div>');
+				
+				var img = $('<img>');
+				img.attr('src', goods[i].url);
+				goodsDiv.append(img);
+				
+				$('.data-id').append(goodsDiv);
+			}
+			
+		}
+	}
+		
 });
