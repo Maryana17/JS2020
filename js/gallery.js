@@ -4,17 +4,27 @@ $(document).ready(function(){
 		{
 			id: 1,
 			name: 'Blond',
-			url: 'https://upload.wikimedia.org/wikipedia/ru/thumb/f/f5/Cinderella_disney_princess.jpg/300px-Cinderella_disney_princess.jpg'
+			url: 'img/Cinderella.jpg'
 		},
 		{
 			id: 2,
 			name: 'Red',
-			url: 'https://e7.pngegg.com/pngimages/846/621/png-clipart-ariel-disney-princess-frames-graph-disney-princess-disney-princess-fictional-character.png'
+			url: 'img/ariel.png'
 		},
 		{
 			id: 3,
 			name: 'Black',
-			url: 'https://c7.hotpng.com/preview/285/923/688/united-states-moana-hei-hei-the-rooster-character-the-walt-disney-company-moana.jpg'
+			url: 'img/moana.jpg'
+		},
+		{
+			id: 4,
+			name: 'Jasmin',
+			url: 'img/jasmin.jpg'
+		},
+		{
+			id: 5,
+			name: 'White',
+			url: 'img/rapunccel.jpg'
 		}
 	];
 	
@@ -43,6 +53,7 @@ $(document).ready(function(){
 		refreshGoods();
 	});
 	
+	
 	$(".right") .click(function(){
 		curentId++;
 		if (curentId == goods.length ){
@@ -50,6 +61,7 @@ $(document).ready(function(){
 		}
 		var good = goods[curentId];
 		$(".center-image").attr('src', good.url);
+		
 		
 	});
 	
@@ -61,7 +73,9 @@ $(document).ready(function(){
 		var good = goods[curentId];
 		$(".center-image").attr('src', good.url);
 		
+		updateCarousel();
 	});
+	
 	
 	
 	function filterGoods(oldGoods){
@@ -75,14 +89,34 @@ $(document).ready(function(){
 		});
 		return newGoods;
 	}
+		
+	function updateCarousel(){
+		
+		var leftIndex = calcIndex(curentId - 1);
+		var rightIndex = calcIndex(curentId + 1);
 	
+		if (leftIndex < 0){
+			leftIndex = goods.length -2;
+		} 
+		var good = goods[leftIndex];
+		$(".left-image").attr("src", good.url);
+		
+		
+	};
+	
+	function calcIndex(index){
+		index %=goods.length;
+		if (index < 0){
+			index = index + goods.length;
+		}
+	return index;
+	};
 	
 	
 	function sortGoods(copyGoods){
 		
 		var register = $("[name=register]:checked").val();
-		
-								
+										
 		var userCheckSortDir = $("[name=sort]:checked").val();
 		
 		var magic = userCheckSortDir == "Up"
@@ -90,7 +124,7 @@ $(document).ready(function(){
 			: -1;
 		
 		var newGoods = copyGoods.sort(function(a, b){
-			var first = a.name;
+		  var first = a.name;
 		  var second = b.name;
 		  
 		  if (register == "without"){
